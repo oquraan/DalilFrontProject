@@ -1,53 +1,88 @@
-function alerts() {
-  const alertCon = document.createElement("div");
-  alertCon.innerHTML = `<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>`;
-  // alertCon.appendChild(alert);
-  document.body.appendChild(alertCon);
-}
+let isLoad = true;
 async function getUsersData() {
   try {
+    toggleSpinner(true);
     const res = await fetch("https://jsonplaceholder.typicode.com/users");
+
     console.log("aaaaaaaaaaaaaa");
 
     if (!res.ok) {
-      console.log("sssssssssssssssssss");
+      console.log("Something error ");
+      showAlert();
+
       // alerts();
+      // alert();
       return;
     }
+    isLoad = false;
     const data = await res.json();
 
-    console.log(data);
-    const card = document.createElement("div");
-    card.className = "card";
-
-    data.forEach((element) => {
-      const cardContainer = document.createElement("div");
-      cardContainer.innerHTML = `
-          
-          <div class="card" style="width: 18rem;">
-  <div class="card-body">
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">id : ${element.id}</li>
-    <li class="list-group-item"> name :${element.name}</li>
-    <li class="list-group-item">email :${element.email}</li>
-        <li class="list-group-item"> city: ${element.address.city}</li > <li class="list-group-item">company :${element.company.name}</li>
-
-
-  </ul >
-      
-</div >`;
-      card.appendChild(cardContainer);
-    });
-    document.body.appendChild(card);
+    renderCards(data);
+    toggleSpinner(false);
   } catch (error) {
-    alerts();
+    console.error("Fetch Error:", error);
+    showAlert();
   }
 }
 getUsersData();
+function renderCards(data) {
+  const container = document.createElement("div");
+  container.className = "d-flex flex-wrap gap-3 p-3 justify-content-center";
 
+  let cardsHTML = "";
+  data.forEach((element) => {
+    cardsHTML += `
+      <div class="card shadow-sm" style="width: 18rem;">
+        <div class="card-body text-center bg-light">
+          <h5 class="card-title text-primary m-0">${element.name}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>ID:</strong> ${element.id}</li>
+          <li class="list-group-item"><strong>Email:</strong> ${element.email}</li>
+          <li class="list-group-item"><strong>City:</strong> ${element.address.city}</li>
+          <li class="list-group-item"><strong>Company:</strong> ${element.company.name}</li>
+        </ul>
+      </div>`;
+  });
+
+  container.innerHTML = cardsHTML;
+  document.body.appendChild(container);
+}
+function toggleSpinner(isLoading) {
+  let sp = document.querySelector(".omar-spinner");
+
+  if (isLoading) {
+    if (!sp) {
+      sp = document.createElement("div");
+      sp.className = "omar-spinner d-flex justify-content-center my-4";
+      sp.innerHTML = `
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>`;
+      document.body.appendChild(sp);
+    }
+  } else {
+    if (sp) sp.remove();
+  }
+}
+
+function showAlert() {
+  const alertCon = document.createElement("div");
+  alertCon.className = "alert-container position-fixed top-0 end-0 p-3";
+  alertCon.style.zIndex = "1050";
+  alertCon.innerHTML = `
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+Something went wrong      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+
+  document.body.appendChild(alertCon);
+  setTimeout(() => alertCon.remove(), 3000);
+}
+
+async function testApiCORS() {
+  const res = await fetch("http://localhost:3000/api/expenses");
+}
+testApiCORS();
 // Expense Tracker - frontend logic
 
 // PHASE 2
