@@ -10,8 +10,7 @@ async function getUsersData() {
       console.log("Something error ");
       showAlert();
 
-      // alerts();
-      // alert();
+     
       return;
     }
     isLoad = false;
@@ -69,7 +68,6 @@ function toggleSpinner(isLoading) {
 function showAlert() {
   const alertCon = document.createElement("div");
   alertCon.className = "alert-container position-fixed top-0 end-0 p-3";
-  alertCon.style.zIndex = "1050";
   alertCon.innerHTML = `
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
 Something went wrong      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
