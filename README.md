@@ -1,11 +1,13 @@
-# Expense Tracker — Frontend
+﻿https://omaressamquraan.com/
+
+# Expense Tracker ” Frontend
 
 A frontend interface for an expense tracking application, built with **HTML + Vanilla JavaScript + Bootstrap 5**.
 Communicates with the Backend via a REST API at `http://localhost:3000/api/expenses`.
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 DalilFrontProject/
@@ -20,9 +22,9 @@ DalilFrontProject/
 
 ---
 
-## [Settings] Functions — `js/expenses.js`
+##  Functions — `js/expenses.js`
 
-### [Globe] API
+### API
 
 | Variable | Value |
 |---------|-------|
@@ -82,7 +84,7 @@ Binds the three page filters to `getAllExpenses()`:
 | Month | `#monthFilter` | `change` |
 | Title search | `#TitleForm` | `input` (with 500ms debounce) |
 
-> [Tip] **Debounce** on the title filter: waits 500ms after the last keystroke before calling the API — to avoid sending a request on every single character typed.
+>  **Debounce** on the title filter: waits 500ms after the last keystroke before calling the API — to avoid sending a request on every single character typed.
 
 ---
 
@@ -202,7 +204,7 @@ Each click calls `getAllExpenses()` with the appropriate `orderBy` value.
 
 ---
 
-## [Settings] Functions — `js/chart.js`
+##  Functions — `js/chart.js`
 
 ### 13. `ChartExpense(data)` ← export
 **File:** `chart.js` — Line 1
@@ -215,9 +217,9 @@ Renders a **Bar Chart** showing the number of expenses per category.
 
 ---
 
-## [Settings] Functions — `js/app.js`
+## Functions `js/app.js`
 
-> [Warning] This file is experimental and contains old code from an earlier development phase.
+> This file is experimental and contains old code from an earlier development phase.
 
 ### 14. `toggleSpinner(isLoading)` ← export
 **File:** `app.js` — Line 51
@@ -236,7 +238,7 @@ Displays a **Bootstrap Alert** (red notification) in the top-right corner of the
 
 ---
 
-## [Refresh] Call Order on Page Load
+## Call Order on Page Load
 
 ```
 1. NavBar()             ← Build the navigation bar
@@ -251,7 +253,7 @@ Displays a **Bootstrap Alert** (red notification) in the top-right corner of the
 
 ---
 
-## [Tools] Technologies Used
+## Technologies Used
 
 | Technology | Usage |
 |------------|-------|
@@ -263,3 +265,8 @@ Displays a **Bootstrap Alert** (red notification) in the top-right corner of the
 | **ES Modules** | `import/export` between files |
 
 ---
+
+## Running the Project
+
+1. Make sure the Backend is running at `http://localhost:3000`
+2. Open `index.html` in the browser (or run it via Live Server)
