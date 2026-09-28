@@ -1,11 +1,11 @@
-# [Money] Expense Tracker — Frontend
+# Expense Tracker — Frontend
 
 A frontend interface for an expense tracking application, built with **HTML + Vanilla JavaScript + Bootstrap 5**.
 Communicates with the Backend via a REST API at `http://localhost:3000/api/expenses`.
 
 ---
 
-## [Folder] Project Structure
+##  Project Structure
 
 ```
 DalilFrontProject/
