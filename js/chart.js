@@ -12,7 +12,7 @@ export function ChartExpense(data) {
   }
   new Chart(ctx, {
     type: "bar",
-    data: {
+    data: {    
       labels: chartLabels,
       datasets: [
         {
