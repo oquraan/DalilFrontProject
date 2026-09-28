@@ -263,10 +263,3 @@ Displays a **Bootstrap Alert** (red notification) in the top-right corner of the
 | **ES Modules** | `import/export` between files |
 
 ---
-
-## [Rocket] Running the Project
-
-1. Make sure the Backend is running at `http://localhost:3000`
-2. Open `index.html` in the browser (or run it via Live Server)
-
-> [Warning] The API URL is set to `http://localhost:3000/api/expenses` at the very first line of `expenses.js`
