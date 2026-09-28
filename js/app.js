@@ -81,7 +81,7 @@ ${message}     <button type="button" class="btn-close" data-bs-dismiss="alert" a
 async function testApiCORS() {
   const res = await fetch("http://localhost:3000/api/expenses");
 }
-testApiCORS();
+// testApiCORS();
 // Expense Tracker - frontend logic
 
 // PHASE 2
