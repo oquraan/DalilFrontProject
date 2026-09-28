@@ -2,13 +2,13 @@ let isLoad = true;
 async function getUsersData() {
   try {
     toggleSpinner(true);
-    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const res = await fetch("https://jsonplaceholder.tyxpicode.com/users");
 
-    console.log("aaaaaaaaaaaaaa");
-
+    console.log("re");
+    console.log(res);
     if (!res.ok) {
       console.log("Something error ");
-      showAlert();
+      showAlert("dddddddddd");
 
      
       return;
@@ -20,7 +20,7 @@ async function getUsersData() {
     toggleSpinner(false);
   } catch (error) {
     console.error("Fetch Error:", error);
-    showAlert();
+    showAlert("sssssssss" + error.message);
   }
 }
 getUsersData();
@@ -47,7 +47,7 @@ function renderCards(data) {
   container.innerHTML = cardsHTML;
   document.body.appendChild(container);
 }
-function toggleSpinner(isLoading) {
+export function toggleSpinner(isLoading) {
   let sp = document.querySelector(".omar-spinner");
 
   if (isLoading) {
@@ -65,12 +65,12 @@ function toggleSpinner(isLoading) {
   }
 }
 
-function showAlert() {
+function showAlert(message) {
   const alertCon = document.createElement("div");
   alertCon.className = "alert-container position-fixed top-0 end-0 p-3";
   alertCon.innerHTML = `
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-Something went wrong      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+${message}     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>`;
 
   document.body.appendChild(alertCon);
