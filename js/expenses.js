@@ -91,13 +91,12 @@ async function getAllExpenses(
       let tableHeader = document.getElementById("tableHeader");
       tableHeader.innerHTML = `
     <tr>
-      <th onclick="getAllExpenses(categoryFilterValue, 'title', monthFilterValue)" style="cursor: pointer;" class="text-primary">Title </th>
-      <th onclick="getAllExpenses(categoryFilterValue, 'amount', monthFilterValue)" style="cursor: pointer;" class="text-primary">Amount </th>
-      <th onclick="getAllExpenses(categoryFilterValue, 'category', monthFilterValue)" style="cursor: pointer;" class="text-primary">Category</th>
-      <th onclick="getAllExpenses(categoryFilterValue, 'date', monthFilterValue)" style="cursor: pointer;" class="text-primary">Date</th>
+      <th data-order="title" style="cursor: pointer;" class="text-primary">Title ↕</th>
+      <th data-order="amount" style="cursor: pointer;" class="text-primary">Amount ↕</th>
+      <th data-order="category" style="cursor: pointer;" class="text-primary">Category ↕</th>
+      <th data-order="date" style="cursor: pointer;" class="text-primary">Date ↕</th>
       <th>Actions</th>
     </tr>
-
   `;
       tableBody.innerHTML = `    <tr>
       <td colspan="5" class="text-center text-danger p-4 fw-bold">
@@ -127,16 +126,17 @@ async function getAllExpenses(
 }
 let categoryFilterValue;
 let monthFilterValue;
+let monthFilter = document.getElementById("monthFilter");
+monthFilterValue = monthFilter.value;
+
 function Filteration() {
   let categoryFilter = document.getElementById("categoryFilter");
   categoryFilterValue = categoryFilter.value;
   categoryFilter.addEventListener("change", (e) => {
     categoryFilterValue = e.target.value;
-    getAllExpenses(categoryFilterValue);
+    getAllExpenses(categoryFilterValue, "", monthFilterValue);
   });
 
-  let monthFilter = document.getElementById("monthFilter");
-  monthFilterValue = monthFilter.value;
   monthFilter.addEventListener("change", (e) => {
     monthFilterValue = e.target.value;
     getAllExpenses(categoryFilterValue, "", monthFilterValue);
@@ -284,7 +284,7 @@ function ShowDataForm(data) {
     actionCell.appendChild(deleteButton);
     actionCell.appendChild(updateButton);
   });
-  OrderDataUsingColumn();
+
 }
 document.getElementById("closeBtn").addEventListener("click", () => {
   document.getElementById("updateBox").style.display = "none";
@@ -411,33 +411,15 @@ async function AddExpense(newExpenseObject) {
 }
 
 function OrderDataUsingColumn() {
-  let titleColumn = document.getElementById("titleColumn");
+  let tableHeader = document.getElementById("tableHeader");
+  if (!tableHeader) return;
 
-  if (titleColumn) {
-    titleColumn.addEventListener("click", () => {
-      getAllExpenses(categoryFilterValue, "title");
-    });
-  }
-  let amountColumn = document.getElementById("amountColumn");
-
-  if (amountColumn) {
-    amountColumn.addEventListener("click", () => {
-      getAllExpenses(categoryFilterValue, "amount");
-    });
-  }
-  let categoryColumn = document.getElementById("categoryColumn");
-
-  if (categoryColumn) {
-    categoryColumn.addEventListener("click", () => {
-      getAllExpenses(categoryFilterValue, "category");
-    });
-  }
-  let dateColumn = document.getElementById("dateColumn");
-
-  if (dateColumn) {
-    dateColumn.addEventListener("click", () => {
-      getAllExpenses(categoryFilterValue, "date");
-    });
-  }
+  tableHeader.addEventListener("click", (e) => {
+    const column = e.target.closest("[data-order]");
+    if (!column) return;
+    const orderBy = column.dataset.order;
+    const titleValue = document.getElementById("TitleForm")?.value || "";
+    getAllExpenses(categoryFilterValue, orderBy, monthFilterValue, titleValue);
+  });
 }
 OrderDataUsingColumn();
