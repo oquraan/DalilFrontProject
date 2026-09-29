@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000/api/expenses";
-// const API_URL = "https://ya3zoah.com/api/expenses";
+// const API_URL = "https://omaressamquraan.com/api/expenses";
 let isLoding = true;
 let isLight = true;
 
@@ -85,7 +85,7 @@ async function getAllExpenses(
       API_URL +
         `?category=${selectedCategory}&orderBy=${orderBy}&month=${month}&title=${title}`,
     );
-    
+
     const data = await response.json();
 
     if (response.status === 404) {
