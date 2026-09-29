@@ -85,6 +85,7 @@ async function getAllExpenses(
       API_URL +
         `?category=${selectedCategory}&orderBy=${orderBy}&month=${month}&title=${title}`,
     );
+    
     const data = await response.json();
 
     if (response.status === 404) {
