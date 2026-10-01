@@ -10,8 +10,7 @@ async function getUsersData() {
       console.log("Something error ");
       showAlert("dddddddddd");
 
-      // alerts();
-      // alert();
+     
       return;
     }
     isLoad = false;
